@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# hn - herdr workspace launcher using zoxide + fzf
+# Quickly create or switch to a herdr workspace for any project directory.
+# herdr equivalent of ./tn (tmux session launcher).
+# Usage: hn [query]   - jump directly if zoxide has a match
+#        hn           - fuzzy pick from zoxide history
+# Intended to run inside a herdr "popup" keybinding (see config.toml), which
+# gives an interactive terminal for fzf and closes automatically on exit.
+
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+for cmd in herdr zoxide fzf awk jq; do
+    if ! command_exists "$cmd"; then
+        echo "Error: Required command '$cmd' not found." >&2
+        exit 1
+    fi
+done
+
+if [ $# -eq 1 ]; then
+    selected=$(zoxide query "$1")
+else
+    selected=$(zoxide query -l | fzf --border --reverse | awk '{print $NF}')
+fi
+
+if [ -z "$selected" ]; then
+    exit 0
+fi
+
+selected_label="$(basename "$selected" | tr . _)"
+
+# Find an existing workspace with a matching label (herdr's session_id
+# equivalent is workspace_id; workspaces are matched by label since the
+# socket API doesn't expose each workspace's cwd).
+ws_id=$(herdr workspace list | jq -r --arg l "$selected_label" \
+    '.result.workspaces[] | select(.label == $l) | .workspace_id' | head -n1)
+
+if [ -n "$ws_id" ]; then
+    herdr workspace focus "$ws_id" >/dev/null
+else
+    herdr workspace create --cwd "$selected" --label "$selected_label" --focus >/dev/null
+fi

@@ -1,0 +1,119 @@
+# Custom theme overrides - inherits from default theme-dark.toml
+
+[mgr]
+cwd = { fg = "#ffffff", italic = true }
+
+# Hovered
+hovered         = { bg = "#333333" }
+preview_hovered = { bg = "#333333" }
+
+# Find
+find_keyword  = { fg = "#000000", bg = "#d7875f", bold = true }
+find_position = { fg = "#ffffff", bg = "#666666", bold = true }
+
+# Marker
+marker_copied   = { fg = "#00ff00", bg = "#00ff00" }
+marker_cut      = { fg = "#ff0000", bg = "#ff0000" }
+marker_marked   = { fg = "#d7d787", bg = "#d7d787" }
+marker_selected = { fg = "#d7d787", bg = "#5f8700" }
+
+# Count
+count_copied   = { fg = "#ffffff", bg = "#00ff00" }
+count_cut      = { fg = "#ffffff", bg = "#ff0000" }
+count_selected = { fg = "#ffffff", bg = "#5f8700" }
+
+# Border
+border_symbol = "│"
+border_style  = { fg = "#666666" }
+
+[tabs]
+active   = { fg = "#ffffff", bg = "#5f87d7" }
+inactive = { fg = "#666666", bg = "#000000" }
+
+[mode]
+normal_main = { fg = "#000000", bg = "#afaf87", bold = true }
+normal_alt  = { fg = "#afaf87", bg = "#333333" }
+
+select_main = { fg = "#000000", bg = "#d7d787", bold = true }
+select_alt  = { fg = "#d7d787", bg = "#333333" }
+
+unset_main  = { fg = "#000000", bg = "#ffafaf", bold = true }
+unset_alt   = { fg = "#ffafaf", bg = "#333333" }
+
+[status]
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+# Progress
+progress_label  = { fg = "#ffffff", bold = true }
+progress_normal = { fg = "#666666" }
+progress_error  = { fg = "#ff0000" }
+
+# Permissions
+perm_type  = { fg = "#5f87d7" }
+perm_read  = { fg = "#ffd700" }
+perm_write = { fg = "#ff0000" }
+perm_exec  = { fg = "#00ff00" }
+perm_sep   = { fg = "#333333" }
+
+[pick]
+border   = { fg = "#5f87d7" }
+active   = { fg = "#ffffff", bg = "#333333" }
+inactive = { fg = "#ffffff" }
+
+[input]
+border   = { fg = "#5f87d7" }
+title    = { fg = "#5f87d7" }
+value    = { fg = "#ffafaf" }
+selected = { bg = "#333333" }
+
+[cmp]
+border   = { fg = "#5f87d7" }
+active   = { fg = "#ffffff", bg = "#333333" }
+inactive = { fg = "#ffffff" }
+
+[tasks]
+border  = { fg = "#5f87d7" }
+title   = { fg = "#5f87d7" }
+hovered = { fg = "#ffffff", bg = "#333333" }
+
+[which]
+cols            = 3
+mask            = { bg = "#000000" }
+cand            = { fg = "#87d7ff" }
+rest            = { fg = "#5f87d7" }
+desc            = { fg = "#d7d787" }
+separator       = " ➜ "
+separator_style = { fg = "#666666" }
+
+[confirm]
+border  = { fg = "#5f87d7" }
+title   = { fg = "#5f87d7" }
+btn_yes = { bg = "#333333" }
+
+[spot]
+border = { fg = "#5f87d7" }
+title  = { fg = "#5f87d7" }
+
+[notify]
+title_info  = { fg = "#5f87d7" }
+title_warn  = { fg = "#ffd700" }
+title_error = { fg = "#ff0000" }
+
+[help]
+on      = { fg = "#00ff00" }
+run     = { fg = "#d7d787" }
+hovered = { bg = "#333333" }
+footer  = { fg = "#ffffff", bg = "#000000" }
+
+[filetype]
+rules = [
+	{ mime = "image/*", fg = "#ffd700" },
+	{ mime = "{audio,video}/*", fg = "#d7d787" },
+	{ mime = "application/*zip", fg = "#ff0000" },
+	{ mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "#ff0000" },
+	{ mime = "application/{pdf,doc,rtf,vnd.*}", fg = "#87d7ff" },
+	{ url = "*", is = "orphan", bg = "#ff0000" },
+	{ url = "*", is = "exec", fg = "#00ff00" },
+	{ url = "*/", fg = "#5f87d7" }
+]

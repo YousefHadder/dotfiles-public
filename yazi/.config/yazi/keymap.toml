@@ -1,0 +1,17 @@
+# A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
+# If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
+
+[mgr]
+prepend_keymap = [
+	# Default quit keeps the shell where it was: don't write --cwd-file, so the
+	# `y()` wrapper has nothing to `cd` into.
+	{ on = "q",     run = "quit --no-cwd-file",  desc = "Quit (keep shell's directory)" },
+
+	# The one key that changes the shell's directory: plain `quit` writes the
+	# --cwd-file, which the `y()` wrapper reads and `cd`s into.
+	{ on = "Q",     run = "quit",                desc = "Quit and cd into yazi's current directory" },
+
+	# Ctrl-c closes the tab, or quits on the last tab; suppress its cwd-file
+	# write too, so `Q` stays the only way to move the shell.
+	{ on = "<C-c>", run = "close --no-cwd-file",  desc = "Close tab / quit (keep shell's directory)" },
+]

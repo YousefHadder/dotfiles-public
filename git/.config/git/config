@@ -1,0 +1,48 @@
+[core]
+	editor = nvim
+	pager = delta
+	ignorecase = false
+[difftool]
+	prompt = false
+[difftool "nvimdiff"]
+	cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[push]
+	default = simple
+[diff]
+	tool = nvimdiff
+	renames = true
+	renamelimit = 5000
+[delta]
+	navigate = true
+	side-by-side = true
+	syntax-theme = base16
+	minus-style = "syntax #3f0001"
+	minus-emph-style = "syntax #780002"
+	plus-style = "syntax #002800"
+	plus-emph-style = "syntax #006000"
+	line-numbers-minus-style = "#d75f5f"
+	line-numbers-plus-style = "#87d787"
+	file-style = "bold yellow"
+	file-decoration-style = "yellow ul"
+	hunk-header-style = "file line-number syntax"
+	hunk-header-decoration-style = "cyan box"
+[color]
+	status = auto
+	diff = auto
+	branch = auto
+	interactive = auto
+	ui = auto
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	useConfigOnly = true
+[alias]
+	cf = "!f() { git clone https://github.com/$1/$2; }; f"
+	co = checkout
+	push-empty = !git commit --allow-empty -m \"Empty commit\" && git push
+[include]
+	path = ~/.config/dotfiles-work/git/config
+	path = ~/.config/dotfiles-local/git/config
